@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Card Theme Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Courier+Prime&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/theme-glassmorphism.css">
+</head>
+<body class="tc-page">
+
+  <!-- Theme Switcher Nav -->
+  <nav class="tc-nav">
+    <div class="tc-nav__inner">
+      <span class="tc-nav__title">Theme Showcase</span>
+      <div class="tc-nav__links">
+        <a href="showcase-border-left.html">Border-Left</a>
+        <a href="showcase-glassmorphism.html">Glassmorphism</a>
+        <a href="showcase-gradient-border.html">Gradient Border</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="tc-main">
+
+    <!-- ===== 1. INFO CARDS ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">1. Info Cards</h2>
+      <p class="tc-section__desc">Basic icon + text cards. Four semantic color variants.</p>
+      <div class="tc-grid tc-grid--1col">
+        <div class="tc-card tc-card--info tc-card--danger">
+          <div class="tc-card__icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="tc-card__body">
+            <h3>Problem</h3>
+            <p>Training CNFs via maximum likelihood requires expensive ODE simulations, and diffusion processes restrict the space of probability paths, leading to slow training and sampling.</p>
+          </div>
+        </div>
+        <div class="tc-card tc-card--info tc-card--warning">
+          <div class="tc-card__icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="tc-card__body">
+            <h3>Motivation</h3>
+            <p>A simulation-free training objective for CNFs would enable scalable generative modeling beyond the constraints of diffusion processes.</p>
+          </div>
+        </div>
+        <div class="tc-card tc-card--info tc-card--primary">
+          <div class="tc-card__icon"><i class="fas fa-brain"></i></div>
+          <div class="tc-card__body">
+            <h3>Method</h3>
+            <p>Flow Matching (FM) regresses a neural network onto target vector fields of fixed conditional probability paths, enabling simulation-free CNF training with Gaussian or Optimal Transport paths.</p>
+          </div>
+        </div>
+        <div class="tc-card tc-card--info tc-card--success">
+          <div class="tc-card__icon"><i class="fas fa-check-circle"></i></div>
+          <div class="tc-card__body">
+            <h3>Result</h3>
+            <p>FM with OT paths achieves state-of-the-art FID of 20.9 on ImageNet 128x128 with faster training, better likelihood (NLL 2.99 on CIFAR-10), and efficient sampling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. METRIC / KPI CARDS ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">2. Metric / KPI Cards</h2>
+      <p class="tc-section__desc">Key metrics with progress bars.</p>
+      <div class="tc-grid tc-grid--4col">
+        <div class="tc-card tc-card--kpi tc-card--primary">
+          <div class="tc-card__value" data-count="2.99">0</div>
+          <div class="tc-card__label">NLL (BPD) on CIFAR-10</div>
+          <div class="tc-card__bar"><div class="tc-card__bar-fill" style="width: 0%" data-width="95%"></div></div>
+        </div>
+        <div class="tc-card tc-card--kpi tc-card--success">
+          <div class="tc-card__value" data-count="6.35">0</div>
+          <div class="tc-card__label">FID on CIFAR-10</div>
+          <div class="tc-card__bar"><div class="tc-card__bar-fill" style="width: 0%" data-width="80%"></div></div>
+        </div>
+        <div class="tc-card tc-card--kpi tc-card--warning">
+          <div class="tc-card__value" data-count="20.9">0</div>
+          <div class="tc-card__label">FID on ImageNet 128</div>
+          <div class="tc-card__bar"><div class="tc-card__bar-fill" style="width: 0%" data-width="72%"></div></div>
+        </div>
+        <div class="tc-card tc-card--kpi tc-card--danger">
+          <div class="tc-card__value" data-count="122">0</div>
+          <div class="tc-card__label">Avg. NFE (OT path)</div>
+          <div class="tc-card__bar"><div class="tc-card__bar-fill" style="width: 0%" data-width="60%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. TIMELINE ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">3. Timeline</h2>
+      <p class="tc-section__desc">Sequential process displayed as a timeline.</p>
+      <div class="tc-timeline">
+        <div class="tc-timeline__item">
+          <div class="tc-timeline__dot tc-timeline__dot--primary"></div>
+          <div class="tc-timeline__card">
+            <span class="tc-timeline__step">Step 1</span>
+            <h3>Define Probability Path</h3>
+            <p>Choose a conditional probability path p_t(x|x_1) from noise p_0 to data-centered distribution p_1.</p>
+          </div>
+        </div>
+        <div class="tc-timeline__item">
+          <div class="tc-timeline__dot tc-timeline__dot--accent"></div>
+          <div class="tc-timeline__card">
+            <span class="tc-timeline__step">Step 2</span>
+            <h3>Construct Vector Field</h3>
+            <p>Derive the conditional vector field u_t(x|x_1) that generates the chosen probability path.</p>
+          </div>
+        </div>
+        <div class="tc-timeline__item">
+          <div class="tc-timeline__dot tc-timeline__dot--success"></div>
+          <div class="tc-timeline__card">
+            <span class="tc-timeline__step">Step 3</span>
+            <h3>Train via CFM Loss</h3>
+            <p>Regress a neural network v_t onto u_t using the Conditional Flow Matching objective (simulation-free).</p>
+          </div>
+        </div>
+        <div class="tc-timeline__item">
+          <div class="tc-timeline__dot tc-timeline__dot--warning"></div>
+          <div class="tc-timeline__card">
+            <span class="tc-timeline__step">Step 4</span>
+            <h3>Sample via ODE</h3>
+            <p>Generate samples by solving the ODE with the learned vector field using off-the-shelf solvers like dopri5.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. ACCORDION ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">4. Accordion</h2>
+      <p class="tc-section__desc">Collapsible FAQ cards.</p>
+      <div style="max-width: 640px;">
+        <div class="tc-accordion">
+          <div class="tc-accordion__header">
+            <div class="tc-accordion__icon"><i class="fas fa-question-circle"></i></div>
+            <h3>Why not just use score matching for CNFs?</h3>
+            <i class="fas fa-chevron-down tc-accordion__arrow"></i>
+          </div>
+          <div class="tc-accordion__body">
+            <p>Score matching is restricted to diffusion processes with curved, suboptimal paths. Flow Matching works with any probability path, including Optimal Transport paths that are simpler and more efficient.</p>
+          </div>
+        </div>
+        <div class="tc-accordion">
+          <div class="tc-accordion__header">
+            <div class="tc-accordion__icon"><i class="fas fa-tachometer-alt"></i></div>
+            <h3>How is FM simulation-free?</h3>
+            <i class="fas fa-chevron-down tc-accordion__arrow"></i>
+          </div>
+          <div class="tc-accordion__body">
+            <p>The Conditional Flow Matching (CFM) objective uses per-sample conditional vector fields that can be computed in closed form, avoiding expensive ODE simulations during training.</p>
+          </div>
+        </div>
+        <div class="tc-accordion">
+          <div class="tc-accordion__header">
+            <div class="tc-accordion__icon"><i class="fas fa-random"></i></div>
+            <h3>What makes OT paths better than diffusion paths?</h3>
+            <i class="fas fa-chevron-down tc-accordion__arrow"></i>
+          </div>
+          <div class="tc-accordion__body">
+            <p>OT paths form straight-line trajectories with constant speed, whereas diffusion paths are curved and can overshoot. This leads to faster training, lower NFE for sampling, and better generalization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. FLIP CARD ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">5. Flip Card</h2>
+      <p class="tc-section__desc">Hover to flip and reveal detailed info.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-flip">
+          <div class="tc-flip__inner">
+            <div class="tc-flip__front tc-flip__front--danger">
+              <i class="fas fa-wave-square"></i>
+              <h3>Diffusion Path</h3>
+              <span class="tc-flip__hint">Hover for details</span>
+            </div>
+            <div class="tc-flip__back">
+              <h3>Diffusion VF</h3>
+              <div class="tc-flip__stat">Curved</div>
+              <p>Recovers VP/VE diffusion as special cases. Paths overshoot and backtrack.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tc-flip">
+          <div class="tc-flip__inner">
+            <div class="tc-flip__front tc-flip__front--primary">
+              <i class="fas fa-route"></i>
+              <h3>OT Path</h3>
+              <span class="tc-flip__hint">Hover for details</span>
+            </div>
+            <div class="tc-flip__back">
+              <h3>Optimal Transport VF</h3>
+              <div class="tc-flip__stat">Straight</div>
+              <p>Straight-line trajectories with constant speed. Simpler regression and fewer NFEs.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tc-flip">
+          <div class="tc-flip__inner">
+            <div class="tc-flip__front tc-flip__front--success">
+              <i class="fas fa-project-diagram"></i>
+              <h3>Gaussian Path</h3>
+              <span class="tc-flip__hint">Hover for details</span>
+            </div>
+            <div class="tc-flip__back">
+              <h3>General Gaussian</h3>
+              <div class="tc-flip__stat">Flexible</div>
+              <p>General family parameterized by mean &mu;_t and std &sigma;_t, subsuming diffusion as special case.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5-2. FLIP CARD INVERTED ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">5-2. Flip Card (Inverted)</h2>
+      <p class="tc-section__desc">Inverted Flip Card. Light front, colored back.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-flip tc-flip--inv">
+          <div class="tc-flip__inner">
+            <div class="tc-flip__front tc-flip__front--inv-danger">
+              <i class="fas fa-wave-square"></i>
+              <h3>Diffusion Path</h3>
+              <span class="tc-flip__hint">Hover for details</span>
+            </div>
+            <div class="tc-flip__back tc-flip__back--danger">
+              <h3>Diffusion VF</h3>
+              <div class="tc-flip__stat">Curved</div>
+              <p>Recovers VP/VE diffusion as special cases. Paths overshoot and backtrack.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tc-flip tc-flip--inv">
+          <div class="tc-flip__inner">
+            <div class="tc-flip__front tc-flip__front--inv-primary">
+              <i class="fas fa-route"></i>
+              <h3>OT Path</h3>
+              <span class="tc-flip__hint">Hover for details</span>
+            </div>
+            <div class="tc-flip__back tc-flip__back--primary">
+              <h3>Optimal Transport VF</h3>
+              <div class="tc-flip__stat">Straight</div>
+              <p>Straight-line trajectories with constant speed. Simpler regression and fewer NFEs.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tc-flip tc-flip--inv">
+          <div class="tc-flip__inner">
+            <div class="tc-flip__front tc-flip__front--inv-success">
+              <i class="fas fa-project-diagram"></i>
+              <h3>Gaussian Path</h3>
+              <span class="tc-flip__hint">Hover for details</span>
+            </div>
+            <div class="tc-flip__back tc-flip__back--success">
+              <h3>General Gaussian</h3>
+              <div class="tc-flip__stat">Flexible</div>
+              <p>General family parameterized by mean &mu;_t and std &sigma;_t, subsuming diffusion as special case.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. TAG / RIBBON ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">6. Tag / Ribbon Card</h2>
+      <p class="tc-section__desc">Corner ribbon tags. Great for status or category labels.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-ribbon-card">
+          <div class="tc-ribbon tc-ribbon--success">Ours</div>
+          <h3>FM w/ OT</h3>
+          <div class="tc-ribbon-card__score">FID 20.9</div>
+          <p>State-of-the-art on ImageNet 128x128 with best likelihood and sample quality.</p>
+        </div>
+        <div class="tc-ribbon-card">
+          <div class="tc-ribbon tc-ribbon--primary">Ours</div>
+          <h3>FM w/ Diffusion</h3>
+          <div class="tc-ribbon-card__score">FID 25.3</div>
+          <p>More robust and stable alternative to score matching with diffusion paths.</p>
+        </div>
+        <div class="tc-ribbon-card">
+          <div class="tc-ribbon tc-ribbon--muted">Baseline</div>
+          <h3>Score Matching</h3>
+          <div class="tc-ribbon-card__score">FID 21.7</div>
+          <p>Traditional score-based diffusion baseline (PGMGAN) on ImageNet 128x128.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. COMPARISON ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">7. Comparison</h2>
+      <p class="tc-section__desc">Before / After comparison.</p>
+      <div class="tc-comparison">
+        <div class="tc-comparison__side tc-comparison__side--before">
+          <h3><i class="fas fa-times-circle"></i> Diffusion-Based Training</h3>
+          <ul class="tc-comparison__list">
+            <li><i class="fas fa-times"></i> Restricted to diffusion probability paths</li>
+            <li><i class="fas fa-times"></i> Curved trajectories, inefficient sampling</li>
+            <li><i class="fas fa-times"></i> Requires specialized SDE/ODE samplers</li>
+            <li><i class="fas fa-times"></i> High NFE for quality samples</li>
+          </ul>
+        </div>
+        <div class="tc-comparison__side tc-comparison__side--after">
+          <h3><i class="fas fa-check-circle"></i> Flow Matching</h3>
+          <ul class="tc-comparison__list">
+            <li><i class="fas fa-check"></i> Works with any probability path</li>
+            <li><i class="fas fa-check"></i> Straight OT paths, efficient sampling</li>
+            <li><i class="fas fa-check"></i> Off-the-shelf ODE solvers (dopri5)</li>
+            <li><i class="fas fa-check"></i> ~40% fewer NFEs with OT paths</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. NUMBERED STEPS ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">8. Numbered Steps</h2>
+      <p class="tc-section__desc">Large numbers with horizontal connectors. Ideal for sequential methodology.</p>
+      <div class="tc-steps">
+        <div class="tc-step">
+          <div class="tc-step__number">01</div>
+          <div class="tc-step__connector"></div>
+          <h3>Sample Noise</h3>
+          <p>Draw x_0 from a standard Gaussian prior p_0 = N(0, I).</p>
+        </div>
+        <div class="tc-step">
+          <div class="tc-step__number">02</div>
+          <div class="tc-step__connector"></div>
+          <h3>Build Cond. Path</h3>
+          <p>Construct conditional path p_t(x|x_1) via Gaussian interpolation or OT displacement.</p>
+        </div>
+        <div class="tc-step">
+          <div class="tc-step__number">03</div>
+          <div class="tc-step__connector"></div>
+          <h3>Regress VF</h3>
+          <p>Minimize CFM loss: ||v_t(x) - u_t(x|x_1)||^2 to learn the vector field.</p>
+        </div>
+        <div class="tc-step">
+          <div class="tc-step__number">04</div>
+          <h3>Generate</h3>
+          <p>Solve the ODE d/dt &phi;_t = v_t(&phi;_t) to push noise to data distribution.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9. QUOTE & CALLOUT ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">9. Quote & Callout</h2>
+      <p class="tc-section__desc">Blockquote + alert callouts.</p>
+      <div class="tc-grid tc-grid--1col" style="max-width: 640px;">
+        <div class="tc-quote">
+          <p>The FM (equation 5) and CFM (equation 9) objectives have identical gradients w.r.t. &theta;. Optimizing CFM is equivalent to optimizing FM.</p>
+          <span class="tc-quote__author">— Lipman et al., Theorem 2</span>
+        </div>
+        <div class="tc-callout tc-callout--info">
+          <span class="tc-callout__icon"><i class="fas fa-info-circle"></i></span>
+          <span>The marginal vector field (eq. 8) generates the marginal probability path (eq. 6), connecting conditional and marginal formulations.</span>
+        </div>
+        <div class="tc-callout tc-callout--warning">
+          <span class="tc-callout__icon"><i class="fas fa-exclamation-triangle"></i></span>
+          <span>Diffusion paths do not reach the true noise distribution in finite time. FM with OT paths avoids this by directly specifying the probability path.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10. IMAGE OVERLAY ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">10. Image Overlay Card</h2>
+      <p class="tc-section__desc">Text overlay on images. Great for portfolios and galleries.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-overlay tc-overlay--primary">
+          <div class="tc-overlay__bg"></div>
+          <div class="tc-overlay__content">
+            <span class="tc-overlay__tag">Dataset</span>
+            <h3>CIFAR-10</h3>
+            <p>NLL 2.99 BPD, FID 6.35, NFE 142</p>
+          </div>
+        </div>
+        <div class="tc-overlay tc-overlay--accent">
+          <div class="tc-overlay__bg"></div>
+          <div class="tc-overlay__content">
+            <span class="tc-overlay__tag">Dataset</span>
+            <h3>ImageNet 64x64</h3>
+            <p>NLL 3.31 BPD, FID 14.45, NFE 138</p>
+          </div>
+        </div>
+        <div class="tc-overlay tc-overlay--success">
+          <div class="tc-overlay__bg"></div>
+          <div class="tc-overlay__content">
+            <span class="tc-overlay__tag">Dataset</span>
+            <h3>ImageNet 128x128</h3>
+            <p>NLL 2.90 BPD, FID 20.9 (SOTA)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 11. HOVER REVEAL ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">11. Hover Reveal Card</h2>
+      <p class="tc-section__desc">Hidden content revealed on hover.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-reveal">
+          <div class="tc-reveal__visible">
+            <div class="tc-reveal__emoji">&#x1F4D0;</div>
+            <h3>CNF Framework</h3>
+            <span class="tc-reveal__cta">Hover to explore <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="tc-reveal__hidden">
+            <h4>Core Components</h4>
+            <ul>
+              <li>Neural network vector field v_t(x;&theta;)</li>
+              <li>ODE: d/dt &phi;_t = v_t(&phi;_t)</li>
+              <li>Push-forward: p_t = [&phi;_t]*p_0</li>
+              <li>Change of variables for likelihood</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tc-reveal">
+          <div class="tc-reveal__visible">
+            <div class="tc-reveal__emoji">&#x1F3AF;</div>
+            <h3>FM Objective</h3>
+            <span class="tc-reveal__cta">Hover to explore <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="tc-reveal__hidden">
+            <h4>Key Equations</h4>
+            <ul>
+              <li>FM loss: E||v_t - u_t||^2</li>
+              <li>CFM loss: per-sample conditional form</li>
+              <li>Identical gradients (Theorem 2)</li>
+              <li>Closed-form conditional VFs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tc-reveal">
+          <div class="tc-reveal__visible">
+            <div class="tc-reveal__emoji">&#x1F680;</div>
+            <h3>OT Paths</h3>
+            <span class="tc-reveal__cta">Hover to explore <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="tc-reveal__hidden">
+            <h4>Advantages</h4>
+            <ul>
+              <li>&mu;_t = tx_1, &sigma;_t = 1-(1-&sigma;_min)t</li>
+              <li>Straight-line interpolation</li>
+              <li>Constant direction VF over time</li>
+              <li>Fewer NFE, better FID tradeoff</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 12. RADAR CHART ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">12. Radar Chart Card</h2>
+      <p class="tc-section__desc">SVG-based radar chart. Ideal for multi-dimensional comparison.</p>
+      <div class="tc-grid tc-grid--2col" style="max-width: 800px; margin: 0 auto;">
+        <div class="tc-card tc-card--radar">
+          <h3>FM w/ OT <span class="tc-card__badge tc-card__badge--success">Ours</span></h3>
+          <div class="tc-radar">
+            <svg viewBox="0 0 200 200">
+              <polygon points="100,20 168,52 168,148 100,180 32,148 32,52" fill="none" stroke="currentColor" opacity="0.15" stroke-width="1"/>
+              <polygon points="100,40 152,62 152,138 100,160 48,138 48,62" fill="none" stroke="currentColor" opacity="0.15" stroke-width="1"/>
+              <polygon points="100,60 136,72 136,128 100,140 64,128 64,72" fill="none" stroke="currentColor" opacity="0.15" stroke-width="1"/>
+              <line x1="100" y1="20" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="168" y1="52" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="168" y1="148" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="100" y1="180" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="32" y1="148" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="32" y1="52" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <polygon points="100,24 164,56 160,145 100,170 40,140 38,55" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="2"/>
+              <circle cx="100" cy="24" r="4" fill="#10b981"/><circle cx="164" cy="56" r="4" fill="#10b981"/>
+              <circle cx="160" cy="145" r="4" fill="#10b981"/><circle cx="100" cy="170" r="4" fill="#10b981"/>
+              <circle cx="40" cy="140" r="4" fill="#10b981"/><circle cx="38" cy="55" r="4" fill="#10b981"/>
+              <text x="100" y="14" text-anchor="middle" font-size="9" fill="currentColor" font-weight="600">NLL</text>
+              <text x="176" y="52" text-anchor="start" font-size="9" fill="currentColor" font-weight="600">FID</text>
+              <text x="176" y="152" text-anchor="start" font-size="9" fill="currentColor" font-weight="600">Speed</text>
+              <text x="100" y="194" text-anchor="middle" font-size="9" fill="currentColor" font-weight="600">Low NFE</text>
+              <text x="20" y="152" text-anchor="end" font-size="9" fill="currentColor" font-weight="600">Stability</text>
+              <text x="20" y="52" text-anchor="end" font-size="9" fill="currentColor" font-weight="600">Flexibility</text>
+            </svg>
+          </div>
+        </div>
+        <div class="tc-card tc-card--radar">
+          <h3>Baseline <span class="tc-card__badge tc-card__badge--muted">Score Matching</span></h3>
+          <div class="tc-radar">
+            <svg viewBox="0 0 200 200">
+              <polygon points="100,20 168,52 168,148 100,180 32,148 32,52" fill="none" stroke="currentColor" opacity="0.15" stroke-width="1"/>
+              <polygon points="100,40 152,62 152,138 100,160 48,138 48,62" fill="none" stroke="currentColor" opacity="0.15" stroke-width="1"/>
+              <polygon points="100,60 136,72 136,128 100,140 64,128 64,72" fill="none" stroke="currentColor" opacity="0.15" stroke-width="1"/>
+              <line x1="100" y1="20" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="168" y1="52" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="168" y1="148" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="100" y1="180" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="32" y1="148" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <line x1="32" y1="52" x2="100" y2="100" stroke="currentColor" opacity="0.1" stroke-width="0.5"/>
+              <polygon points="100,45 145,70 140,130 100,140 60,135 50,68" fill="rgba(100,116,139,0.15)" stroke="#64748b" stroke-width="2"/>
+              <circle cx="100" cy="45" r="4" fill="#64748b"/><circle cx="145" cy="70" r="4" fill="#64748b"/>
+              <circle cx="140" cy="130" r="4" fill="#64748b"/><circle cx="100" cy="140" r="4" fill="#64748b"/>
+              <circle cx="60" cy="135" r="4" fill="#64748b"/><circle cx="50" cy="68" r="4" fill="#64748b"/>
+              <text x="100" y="14" text-anchor="middle" font-size="9" fill="currentColor" font-weight="600">NLL</text>
+              <text x="176" y="52" text-anchor="start" font-size="9" fill="currentColor" font-weight="600">FID</text>
+              <text x="176" y="152" text-anchor="start" font-size="9" fill="currentColor" font-weight="600">Speed</text>
+              <text x="100" y="194" text-anchor="middle" font-size="9" fill="currentColor" font-weight="600">Low NFE</text>
+              <text x="20" y="152" text-anchor="end" font-size="9" fill="currentColor" font-weight="600">Stability</text>
+              <text x="20" y="52" text-anchor="end" font-size="9" fill="currentColor" font-weight="600">Flexibility</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 13. TIER / PRICING ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">13. Tier / Pricing Cards</h2>
+      <p class="tc-section__desc">Tier comparison with featured highlight.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-tier">
+          <div class="tc-tier__name">Baseline</div>
+          <div class="tc-tier__price">Score Matching</div>
+          <div class="tc-tier__period">Diffusion-based</div>
+          <ul class="tc-tier__features">
+            <li><i class="fas fa-check"></i> Denoising score matching loss</li>
+            <li><i class="fas fa-check"></i> Proven generative quality</li>
+            <li><i class="fas fa-times"></i> Restricted to diffusion paths</li>
+            <li><i class="fas fa-times"></i> High NFE for sampling</li>
+          </ul>
+          <button class="tc-tier__btn">Baseline</button>
+        </div>
+        <div class="tc-tier tc-tier--featured">
+          <div class="tc-card__badge">Recommended</div>
+          <div class="tc-tier__name">Best</div>
+          <div class="tc-tier__price">FM w/ OT</div>
+          <div class="tc-tier__period">Optimal Transport Paths</div>
+          <ul class="tc-tier__features">
+            <li><i class="fas fa-check"></i> Simulation-free training</li>
+            <li><i class="fas fa-check"></i> Straight-line OT trajectories</li>
+            <li><i class="fas fa-check"></i> Best NLL and FID scores</li>
+            <li><i class="fas fa-check"></i> Lowest NFE for sampling</li>
+          </ul>
+          <button class="tc-tier__btn">Best Choice</button>
+        </div>
+        <div class="tc-tier">
+          <div class="tc-tier__name">Alternative</div>
+          <div class="tc-tier__price">FM w/ Diffusion</div>
+          <div class="tc-tier__period">Diffusion Probability Paths</div>
+          <ul class="tc-tier__features">
+            <li><i class="fas fa-check"></i> Simulation-free training</li>
+            <li><i class="fas fa-check"></i> More robust than score matching</li>
+            <li><i class="fas fa-times"></i> Curved trajectories</li>
+            <li><i class="fas fa-times"></i> Higher NFE than OT</li>
+          </ul>
+          <button class="tc-tier__btn">Alternative</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 14. KANBAN ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">14. Kanban Board</h2>
+      <p class="tc-section__desc">Column-based board. Ideal for project progress tracking.</p>
+      <div class="tc-kanban">
+        <div class="tc-kanban__col">
+          <div class="tc-kanban__header tc-kanban__header--primary">
+            <span class="tc-kanban__dot"></span> To Do <span class="tc-kanban__count">2</span>
+          </div>
+          <div class="tc-kanban__card">
+            <div class="tc-kanban__tag tc-kanban__tag--accent">Research</div>
+            <h4>Non-Gaussian kernels</h4>
+            <p>Explore non-isotropic Gaussians or general kernel paths</p>
+          </div>
+          <div class="tc-kanban__card">
+            <div class="tc-kanban__tag tc-kanban__tag--warning">Experiment</div>
+            <h4>Higher resolution</h4>
+            <p>Scale FM-OT to ImageNet 256x256 and beyond</p>
+          </div>
+        </div>
+        <div class="tc-kanban__col">
+          <div class="tc-kanban__header tc-kanban__header--warning">
+            <span class="tc-kanban__dot"></span> In Progress <span class="tc-kanban__count">2</span>
+          </div>
+          <div class="tc-kanban__card tc-kanban__card--active">
+            <div class="tc-kanban__tag tc-kanban__tag--primary">Core</div>
+            <h4>Conditional generation</h4>
+            <p>Super-resolution from 64x64 to 256x256 via FM</p>
+            <div class="tc-kanban__progress"><div class="tc-kanban__progress-fill" style="width: 65%"></div></div>
+          </div>
+          <div class="tc-kanban__card tc-kanban__card--active">
+            <div class="tc-kanban__tag tc-kanban__tag--success">Eval</div>
+            <h4>Low-NFE sampling</h4>
+            <p>Compare fixed-step solvers (Euler, Midpoint, RK4)</p>
+            <div class="tc-kanban__progress"><div class="tc-kanban__progress-fill" style="width: 40%"></div></div>
+          </div>
+        </div>
+        <div class="tc-kanban__col">
+          <div class="tc-kanban__header tc-kanban__header--success">
+            <span class="tc-kanban__dot"></span> Done <span class="tc-kanban__count">2</span>
+          </div>
+          <div class="tc-kanban__card tc-kanban__card--done">
+            <div class="tc-kanban__tag tc-kanban__tag--primary">Core</div>
+            <h4>CFM objective</h4>
+            <p>Conditional Flow Matching with Gaussian paths implemented</p>
+          </div>
+          <div class="tc-kanban__card tc-kanban__card--done">
+            <div class="tc-kanban__tag tc-kanban__tag--accent">Research</div>
+            <h4>OT path derivation</h4>
+            <p>Optimal Transport displacement interpolant formulation</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 15. CHAT BUBBLE ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">15. Chat Bubble</h2>
+      <p class="tc-section__desc">Chat-style bubbles. Great for Q&amp;A and interviews.</p>
+      <div class="tc-chat" style="max-width: 600px;">
+        <div class="tc-chat__bubble tc-chat__bubble--q">
+          <div class="tc-chat__avatar tc-chat__avatar--q">Q</div>
+          <div class="tc-chat__msg"><p>How does Flow Matching differ from score matching for diffusion models?</p></div>
+        </div>
+        <div class="tc-chat__bubble tc-chat__bubble--a">
+          <div class="tc-chat__msg"><p>FM directly regresses <strong>vector fields</strong> instead of score functions. It works with <strong>any probability path</strong>, not just diffusion, and the CFM objective is simulation-free.</p></div>
+          <div class="tc-chat__avatar tc-chat__avatar--a">A</div>
+        </div>
+        <div class="tc-chat__bubble tc-chat__bubble--q">
+          <div class="tc-chat__avatar tc-chat__avatar--q">Q</div>
+          <div class="tc-chat__msg"><p>Why are Optimal Transport paths better?</p></div>
+        </div>
+        <div class="tc-chat__bubble tc-chat__bubble--a">
+          <div class="tc-chat__msg"><p>OT paths produce <strong>straight-line trajectories</strong> with constant velocity. This makes the VF simpler to learn and requires <strong>~40% fewer function evaluations</strong> for sampling.</p></div>
+          <div class="tc-chat__avatar tc-chat__avatar--a">A</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 16. TERMINAL ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">16. Terminal / Code Card</h2>
+      <p class="tc-section__desc">Terminal window style. Great for code and CLI commands.</p>
+      <div class="tc-grid tc-grid--1col" style="max-width: 700px;">
+        <div class="tc-term">
+          <div class="tc-term__bar">
+            <div class="tc-term__dots">
+              <span class="tc-term__dot tc-term__dot--red"></span>
+              <span class="tc-term__dot tc-term__dot--yellow"></span>
+              <span class="tc-term__dot tc-term__dot--green"></span>
+            </div>
+            <span class="tc-term__title">flow_matching.py</span>
+            <div style="width:52px"></div>
+          </div>
+          <div class="tc-term__body">
+            <div class="tc-term__line"><span class="tc-term--comment"># Conditional Flow Matching (OT path)</span></div>
+            <div class="tc-term__line"><span class="tc-term--keyword">def</span> <span class="tc-term--func">cfm_loss</span>(v_net, x1, sigma_min=<span class="tc-term--num">1e-4</span>):</div>
+            <div class="tc-term__line tc-term__line--indent">t = torch.rand(x1.shape[<span class="tc-term--num">0</span>])</div>
+            <div class="tc-term__line tc-term__line--indent">x0 = torch.randn_like(x1)</div>
+            <div class="tc-term__line tc-term__line--indent">mu_t = t * x1  <span class="tc-term--comment"># OT mean</span></div>
+            <div class="tc-term__line tc-term__line--indent">sigma_t = <span class="tc-term--num">1</span> - (<span class="tc-term--num">1</span> - sigma_min) * t</div>
+            <div class="tc-term__line tc-term__line--indent">x = mu_t + sigma_t * x0</div>
+            <div class="tc-term__line tc-term__line--indent">target = x1 - (<span class="tc-term--num">1</span> - sigma_min) * x0</div>
+            <div class="tc-term__line tc-term__line--indent"><span class="tc-term--keyword">return</span> (v_net(t, x) - target).pow(<span class="tc-term--num">2</span>).mean()</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 17. DONUT CHART ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">17. Donut Chart Card</h2>
+      <p class="tc-section__desc">SVG donut charts for ratio display.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-donut-card">
+          <div class="tc-donut" data-value="67">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" opacity="0.1" stroke-width="10"/>
+              <circle class="tc-donut__ring" cx="60" cy="60" r="50" fill="none" stroke="var(--tc-primary)" stroke-width="10" stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="tc-donut__label"><span class="tc-donut__val">67</span>%</div>
+          </div>
+          <h3>NFE Reduction</h3>
+          <p>OT vs Diffusion on CIFAR-10</p>
+        </div>
+        <div class="tc-donut-card">
+          <div class="tc-donut" data-value="60">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" opacity="0.1" stroke-width="10"/>
+              <circle class="tc-donut__ring" cx="60" cy="60" r="50" fill="none" stroke="var(--tc-accent)" stroke-width="10" stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="tc-donut__label"><span class="tc-donut__val">60</span>%</div>
+          </div>
+          <h3>Compute Saved</h3>
+          <p>OT reaches same error with 60% of NFEs</p>
+        </div>
+        <div class="tc-donut-card">
+          <div class="tc-donut" data-value="85">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" opacity="0.1" stroke-width="10"/>
+              <circle class="tc-donut__ring" cx="60" cy="60" r="50" fill="none" stroke="var(--tc-success)" stroke-width="10" stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="tc-donut__label"><span class="tc-donut__val">85</span>%</div>
+          </div>
+          <h3>Path Straightness</h3>
+          <p>OT paths near-linear vs curved diffusion</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 18. STACKED BAR ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">18. Stacked Bar Chart</h2>
+      <p class="tc-section__desc">Horizontal bar comparison chart. FID scores on ImageNet 128x128 (lower is better, bars show relative quality).</p>
+      <div style="max-width: 640px;">
+        <div class="tc-sbar">
+          <div class="tc-sbar__row">
+            <div class="tc-sbar__label">FM w/ OT <span class="tc-card__badge tc-card__badge--success">Ours</span></div>
+            <div class="tc-sbar__track"><div class="tc-sbar__fill tc-sbar__fill--primary" data-width="95%"><span>FID 20.9</span></div></div>
+          </div>
+          <div class="tc-sbar__row">
+            <div class="tc-sbar__label">PGMGAN</div>
+            <div class="tc-sbar__track"><div class="tc-sbar__fill tc-sbar__fill--accent" data-width="90%"><span>FID 21.7</span></div></div>
+          </div>
+          <div class="tc-sbar__row">
+            <div class="tc-sbar__label">BigGAN</div>
+            <div class="tc-sbar__track"><div class="tc-sbar__fill tc-sbar__fill--success" data-width="80%"><span>FID 25.3</span></div></div>
+          </div>
+          <div class="tc-sbar__row">
+            <div class="tc-sbar__label">Self-cond. GAN</div>
+            <div class="tc-sbar__track"><div class="tc-sbar__fill tc-sbar__fill--muted" data-width="60%"><span>FID 41.7</span></div></div>
+          </div>
+          <div class="tc-sbar__row">
+            <div class="tc-sbar__label">MGAN</div>
+            <div class="tc-sbar__track"><div class="tc-sbar__fill tc-sbar__fill--danger" data-width="40%"><span>FID 58.9</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 19. TABBED ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">19. Tabbed Card</h2>
+      <p class="tc-section__desc">Tab switching to display multiple content panels.</p>
+      <div style="max-width: 600px;">
+        <div class="tc-tabbed">
+          <div class="tc-tabbed__tabs">
+            <button class="tc-tabbed__tab tc-tabbed__tab--active" data-panel="tc-tab-arch">CNF Model</button>
+            <button class="tc-tabbed__tab" data-panel="tc-tab-train">FM Training</button>
+            <button class="tc-tabbed__tab" data-panel="tc-tab-deploy">Sampling</button>
+          </div>
+          <div class="tc-tabbed__panels">
+            <div class="tc-tabbed__panel tc-tabbed__panel--active" id="tc-tab-arch">
+              <div class="tc-tabbed__icon"><i class="fas fa-sitemap"></i></div>
+              <h4>Continuous Normalizing Flow</h4>
+              <p>A neural network v_t(x;&theta;) parameterizes the time-dependent vector field. The flow &phi;_t transforms noise p_0 to data p_1 via an ODE.</p>
+              <div class="tc-tabbed__chips"><span>U-Net</span><span>Vector Field</span><span>ODE Solver</span><span>Push-forward</span></div>
+            </div>
+            <div class="tc-tabbed__panel" id="tc-tab-train">
+              <div class="tc-tabbed__icon"><i class="fas fa-graduation-cap"></i></div>
+              <h4>Conditional Flow Matching</h4>
+              <p>The CFM loss regresses v_t onto per-sample conditional VFs u_t(x|x_1). Equivalent gradients to the intractable FM objective (Theorem 2).</p>
+              <div class="tc-tabbed__chips"><span>Simulation-free</span><span>Per-sample</span><span>Gaussian Path</span><span>OT Path</span></div>
+            </div>
+            <div class="tc-tabbed__panel" id="tc-tab-deploy">
+              <div class="tc-tabbed__icon"><i class="fas fa-rocket"></i></div>
+              <h4>ODE-based Sampling</h4>
+              <p>Sample x_0 from N(0,I), solve the learned ODE to t=1 using dopri5 or fixed-step solvers. OT paths enable low-NFE generation.</p>
+              <div class="tc-tabbed__chips"><span>dopri5</span><span>Euler</span><span>Midpoint</span><span>RK4</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 20. NOTIFICATION / TOAST ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">20. Notification / Toast</h2>
+      <p class="tc-section__desc">Notification-style cards.</p>
+      <div class="tc-grid tc-grid--1col" style="max-width: 480px;">
+        <div class="tc-toast tc-toast--success">
+          <div class="tc-toast__icon"><i class="fas fa-check-circle"></i></div>
+          <div class="tc-toast__body"><strong>Training Complete</strong><p>FM-OT on ImageNet 128: FID 20.9, NLL 2.90 BPD.</p></div>
+          <div class="tc-toast__time">2m ago</div>
+        </div>
+        <div class="tc-toast tc-toast--info">
+          <div class="tc-toast__icon"><i class="fas fa-info-circle"></i></div>
+          <div class="tc-toast__body"><strong>New SOTA</strong><p>Best unconditional FID on ImageNet 128x128 among flow/diffusion methods.</p></div>
+          <div class="tc-toast__time">5m ago</div>
+        </div>
+        <div class="tc-toast tc-toast--warning">
+          <div class="tc-toast__icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="tc-toast__body"><strong>High NFE Alert</strong><p>Diffusion path requires 195 NFE on ImageNet 32. Consider switching to OT path.</p></div>
+          <div class="tc-toast__time">8m ago</div>
+        </div>
+        <div class="tc-toast tc-toast--danger">
+          <div class="tc-toast__icon"><i class="fas fa-times-circle"></i></div>
+          <div class="tc-toast__body"><strong>Score Flow Diverged</strong><p>ScoreFlow baseline FID 20.78 on CIFAR-10 with 428 NFE. Unstable training detected.</p></div>
+          <div class="tc-toast__time">12m ago</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 21. HORIZONTAL SCROLL ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">21. Horizontal Scroll</h2>
+      <p class="tc-section__desc">Horizontal scrolling card rail.</p>
+      <div class="tc-hscroll">
+        <div class="tc-hscroll__track">
+          <div class="tc-hscroll__card"><span class="tc-hscroll__year">2015</span><h4>Diffusion Models</h4><p>Sohl-Dickstein et al. introduced deep unsupervised learning via nonequilibrium thermodynamics.</p></div>
+          <div class="tc-hscroll__card"><span class="tc-hscroll__year">2018</span><h4>Neural ODE / FFJORD</h4><p>Chen et al. proposed CNFs. Grathwohl et al. introduced FFJORD for scalable likelihood.</p></div>
+          <div class="tc-hscroll__card"><span class="tc-hscroll__year">2020</span><h4>DDPM / Score SDE</h4><p>Ho et al. and Song et al. scaled diffusion models to high-quality image generation.</p></div>
+          <div class="tc-hscroll__card"><span class="tc-hscroll__year">2022</span><h4>Stable Diffusion</h4><p>Rombach et al. brought latent diffusion models to mainstream text-to-image generation.</p></div>
+          <div class="tc-hscroll__card tc-hscroll__card--highlight"><span class="tc-hscroll__year">2023</span><h4>Flow Matching</h4><p>Lipman et al. proposed simulation-free CNF training with OT paths. New SOTA on ImageNet.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 22. BREADCRUMB FLOW ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">22. Breadcrumb Flow</h2>
+      <p class="tc-section__desc">Arrow-connected horizontal flow. Great for pipelines.</p>
+      <div class="tc-flow">
+        <div class="tc-flow__node tc-flow__node--primary"><i class="fas fa-dice"></i><span>Noise x_0</span></div>
+        <div class="tc-flow__arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="tc-flow__node tc-flow__node--accent"><i class="fas fa-brain"></i><span>v_t (U-Net)</span></div>
+        <div class="tc-flow__arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="tc-flow__node tc-flow__node--warning"><i class="fas fa-cogs"></i><span>ODE Solve</span></div>
+        <div class="tc-flow__arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="tc-flow__node tc-flow__node--primary"><i class="fas fa-exchange-alt"></i><span>Flow &phi;_t</span></div>
+        <div class="tc-flow__arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="tc-flow__node tc-flow__node--success"><i class="fas fa-image"></i><span>Sample x_1</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 23. HEATMAP TABLE ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">23. Heatmap Table</h2>
+      <p class="tc-section__desc">Cell colors represent value magnitude. Table 1 from paper (lower NLL/FID = better).</p>
+      <div style="max-width: 700px; margin: 0 auto;">
+        <div class="tc-heatmap">
+          <table>
+            <thead><tr><th>Method</th><th>CIFAR NLL</th><th>CIFAR FID</th><th>IN-32 FID</th><th>IN-64 FID</th></tr></thead>
+            <tbody>
+              <tr><td class="tc-heatmap__label">FM w/ OT (Ours)</td><td class="tc-heatmap__cell tc-heatmap__cell--best" style="--heat:0.97">2.99</td><td class="tc-heatmap__cell tc-heatmap__cell--best" style="--heat:0.94">6.35</td><td class="tc-heatmap__cell tc-heatmap__cell--best" style="--heat:0.95">5.02</td><td class="tc-heatmap__cell tc-heatmap__cell--best" style="--heat:0.93">14.45</td></tr>
+              <tr><td class="tc-heatmap__label">FM w/ Diffusion</td><td class="tc-heatmap__cell" style="--heat:0.90">3.10</td><td class="tc-heatmap__cell" style="--heat:0.85">8.06</td><td class="tc-heatmap__cell" style="--heat:0.88">6.37</td><td class="tc-heatmap__cell" style="--heat:0.82">16.88</td></tr>
+              <tr><td class="tc-heatmap__label">DDPM</td><td class="tc-heatmap__cell" style="--heat:0.88">3.12</td><td class="tc-heatmap__cell" style="--heat:0.75">7.48</td><td class="tc-heatmap__cell" style="--heat:0.80">6.99</td><td class="tc-heatmap__cell" style="--heat:0.70">17.36</td></tr>
+              <tr><td class="tc-heatmap__label">Score Matching</td><td class="tc-heatmap__cell" style="--heat:0.85">3.16</td><td class="tc-heatmap__cell" style="--heat:0.50">19.94</td><td class="tc-heatmap__cell" style="--heat:0.65">5.68</td><td class="tc-heatmap__cell" style="--heat:0.55">19.74</td></tr>
+              <tr><td class="tc-heatmap__label">ScoreFlow</td><td class="tc-heatmap__cell" style="--heat:0.87">3.09</td><td class="tc-heatmap__cell" style="--heat:0.40">20.78</td><td class="tc-heatmap__cell" style="--heat:0.45">14.14</td><td class="tc-heatmap__cell" style="--heat:0.35">24.95</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 24. TESTIMONIAL ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">24. Testimonial Card</h2>
+      <p class="tc-section__desc">Star rating + quote + profile.</p>
+      <div class="tc-grid tc-grid--2col" style="max-width: 800px; margin: 0 auto;">
+        <div class="tc-testi">
+          <div class="tc-testi__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Flow Matching elegantly unifies diffusion and OT perspectives. The simulation-free objective is a breakthrough for scalable CNF training."</p>
+          <div class="tc-testi__author">
+            <div class="tc-testi__avatar tc-testi__avatar--primary">YL</div>
+            <div><strong>Yaron Lipman</strong><span>Meta AI (FAIR)</span></div>
+          </div>
+        </div>
+        <div class="tc-testi">
+          <div class="tc-testi__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <p>"OT paths forming straight-line trajectories is both intuitive and powerful. The constant-direction VF makes regression significantly easier."</p>
+          <div class="tc-testi__author">
+            <div class="tc-testi__avatar tc-testi__avatar--success">RC</div>
+            <div><strong>Ricky T. Q. Chen</strong><span>Meta AI (FAIR)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 25. FLOATING LABEL ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">25. Floating Label Card</h2>
+      <p class="tc-section__desc">Floating-label form style. Ideal for settings panels.</p>
+      <div style="max-width: 500px;">
+        <div class="tc-flabel">
+          <h3 class="tc-flabel__title"><i class="fas fa-sliders-h"></i> Hyperparameters (ImageNet 128)</h3>
+          <div class="tc-flabel__group">
+            <div class="tc-flabel__item"><span class="tc-flabel__key">Learning Rate</span><span class="tc-flabel__val">1e-4</span></div>
+            <div class="tc-flabel__item"><span class="tc-flabel__key">Batch Size</span><span class="tc-flabel__val">1536</span></div>
+            <div class="tc-flabel__item"><span class="tc-flabel__key">Epochs</span><span class="tc-flabel__val">571</span></div>
+            <div class="tc-flabel__item"><span class="tc-flabel__key">Iterations</span><span class="tc-flabel__val">500k</span></div>
+            <div class="tc-flabel__item"><span class="tc-flabel__key">ODE Solver</span><span class="tc-flabel__val">dopri5</span></div>
+            <div class="tc-flabel__item"><span class="tc-flabel__key">Path Type</span><span class="tc-flabel__val tc-flabel__val--tag">Optimal Transport</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 26. SPLIT COLOR (as function) ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">26. Split Color Card</h2>
+      <p class="tc-section__desc">Colored top region + content below.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-split tc-split--primary">
+          <div class="tc-split__top"><div class="tc-split__circle"><i class="fas fa-stairs"></i></div></div>
+          <div class="tc-split__bottom">
+            <h3>Stair</h3>
+            <p>Traverses consecutive stairs up to 18cm tall.</p>
+            <div class="tc-split__tags"><span>Real-world</span><span>Zero-shot</span></div>
+          </div>
+        </div>
+        <div class="tc-split tc-split--accent">
+          <div class="tc-split__top"><div class="tc-split__circle"><i class="fas fa-arrows-alt-h"></i></div></div>
+          <div class="tc-split__bottom">
+            <h3>Gap</h3>
+            <p>Precisely jumps across gaps up to 70cm wide.</p>
+            <div class="tc-split__tags"><span>Real-world</span><span>Zero-shot</span></div>
+          </div>
+        </div>
+        <div class="tc-split tc-split--success">
+          <div class="tc-split__top"><div class="tc-split__circle"><i class="fas fa-cube"></i></div></div>
+          <div class="tc-split__bottom">
+            <h3>Step</h3>
+            <p>Climbs over obstacles up to 45cm high.</p>
+            <div class="tc-split__tags"><span>Real-world</span><span>Zero-shot</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 27. POLAROID (as function) ===== -->
+    <section class="tc-section">
+      <h2 class="tc-section__title">27. Polaroid Card</h2>
+      <p class="tc-section__desc">Polaroid photo style cards.</p>
+      <div class="tc-grid tc-grid--3col">
+        <div class="tc-polaroid" style="transform: rotate(-2deg)">
+          <div class="tc-polaroid__img tc-polaroid__img--primary"><i class="fas fa-stairs"></i></div>
+          <div class="tc-polaroid__caption"><p>Stair traversal - 18cm</p><span>Unitree Go1 / Lab</span></div>
+        </div>
+        <div class="tc-polaroid" style="transform: rotate(1deg)">
+          <div class="tc-polaroid__img tc-polaroid__img--accent"><i class="fas fa-arrows-alt-h"></i></div>
+          <div class="tc-polaroid__caption"><p>Gap crossing - 70cm</p><span>Unitree Go1 / Outdoor</span></div>
+        </div>
+        <div class="tc-polaroid" style="transform: rotate(-1.5deg)">
+          <div class="tc-polaroid__img tc-polaroid__img--success"><i class="fas fa-cube"></i></div>
+          <div class="tc-polaroid__caption"><p>Step mounting - 45cm</p><span>Unitree Go1 / Lab</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/showcase.js"></script>
+</body>
+</html>
