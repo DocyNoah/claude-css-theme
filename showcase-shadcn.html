@@ -7,7 +7,300 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Courier+Prime&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/theme-gradient-border.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      theme: {
+        extend: {
+          colors: {
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            card: { DEFAULT: 'hsl(var(--card))', foreground: 'hsl(var(--card-foreground))' },
+            primary: { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+            secondary: { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+            muted: { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+            accent: { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+            destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+            border: 'hsl(var(--border))',
+            ring: 'hsl(var(--ring))',
+          },
+          borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)',
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    /* shadcn/ui HSL variable system */
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
+      --primary: 240 5.9% 10%;
+      --primary-foreground: 0 0% 98%;
+      --secondary: 240 4.8% 95.9%;
+      --secondary-foreground: 240 5.9% 10%;
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
+      --accent: 240 4.8% 95.9%;
+      --accent-foreground: 240 5.9% 10%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 98%;
+      --border: 240 5.9% 90%;
+      --ring: 240 5.9% 10%;
+      --radius: 0.5rem;
+
+      /* Map to existing tc-* system */
+      --tc-bg: hsl(0 0% 100%);
+      --tc-bg2: hsl(240 4.8% 95.9%);
+      --tc-bg3: hsl(240 5.9% 90%);
+      --tc-text: hsl(240 10% 3.9%);
+      --tc-text2: hsl(240 3.8% 46.1%);
+      --tc-text-inv: hsl(0 0% 98%);
+      --tc-border: hsl(240 5.9% 90%);
+      --tc-primary: hsl(240 5.9% 10%);
+      --tc-success: hsl(142 76% 36%);
+      --tc-warning: hsl(38 92% 50%);
+      --tc-danger: hsl(0 84.2% 60.2%);
+      --tc-accent: hsl(262 83% 58%);
+      --tc-muted: hsl(240 3.8% 46.1%);
+      --tc-radius: 0.5rem;
+      --tc-radius-lg: 0.75rem;
+    }
+
+    /* --- Cards --- */
+    .tc-card {
+      @apply bg-card text-card-foreground rounded-lg;
+      border: 1px solid hsl(var(--border));
+    }
+    .tc-card:hover {
+      @apply -translate-y-0.5;
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    }
+    .tc-card__icon { @apply rounded-md; }
+    .tc-card--primary .tc-card__icon { @apply bg-secondary text-secondary-foreground; }
+    .tc-card--success .tc-card__icon { background: hsl(142 76% 36% / 0.1); color: hsl(142 76% 36%); }
+    .tc-card--warning .tc-card__icon { background: hsl(38 92% 50% / 0.1); color: hsl(38 92% 50%); }
+    .tc-card--danger  .tc-card__icon { background: hsl(0 84.2% 60.2% / 0.1); @apply text-destructive; }
+    .tc-card--primary .tc-card__value { @apply text-foreground; }
+    .tc-card--success .tc-card__value { color: hsl(142 76% 36%); }
+    .tc-card--warning .tc-card__value { color: hsl(38 92% 50%); }
+    .tc-card--danger  .tc-card__value { @apply text-destructive; }
+    .tc-card__bar { @apply bg-secondary rounded-full; }
+    .tc-card--primary .tc-card__bar-fill { @apply bg-foreground rounded-full; }
+    .tc-card--success .tc-card__bar-fill { background: hsl(142 76% 36%); @apply rounded-full; }
+    .tc-card--warning .tc-card__bar-fill { background: hsl(38 92% 50%); @apply rounded-full; }
+    .tc-card--danger  .tc-card__bar-fill { @apply bg-destructive rounded-full; }
+    .tc-card__badge { @apply bg-secondary text-secondary-foreground rounded-md; }
+    .tc-card__badge--success { background: hsl(142 76% 36% / 0.1); color: hsl(142 76% 36%); @apply rounded-md; }
+    .tc-card__badge--muted { @apply bg-muted text-muted-foreground rounded-md; }
+    .tc-card--radar { @apply bg-card; border: 1px solid hsl(var(--border)); }
+
+    /* --- Timeline --- */
+    .tc-timeline { --tl-c1: hsl(240 5.9% 10%); --tl-c2: hsl(262 83% 58%); --tl-c3: hsl(142 76% 36%); --tl-c4: hsl(38 92% 50%); }
+    .tc-timeline__dot--primary { @apply bg-primary; box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px hsl(var(--primary)); }
+    .tc-timeline__dot--accent  { background: hsl(262 83% 58%); box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px hsl(262 83% 58%); }
+    .tc-timeline__dot--success { background: hsl(142 76% 36%); box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px hsl(142 76% 36%); }
+    .tc-timeline__dot--warning { background: hsl(38 92% 50%); box-shadow: 0 0 0 3px hsl(var(--background)), 0 0 0 5px hsl(38 92% 50%); }
+    .tc-timeline__card { @apply bg-card; border: 1px solid hsl(var(--border)); }
+
+    /* --- Accordion --- */
+    .tc-accordion { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-accordion.open { border-color: hsl(var(--foreground) / 0.2); }
+    .tc-accordion__icon { @apply bg-secondary rounded-md; }
+    .tc-accordion:nth-child(1) .tc-accordion__icon { @apply text-foreground; }
+    .tc-accordion:nth-child(2) .tc-accordion__icon { color: hsl(262 83% 58%); }
+    .tc-accordion:nth-child(3) .tc-accordion__icon { color: hsl(142 76% 36%); }
+
+    /* --- Flip --- */
+    .tc-flip__front--danger  { @apply bg-destructive; }
+    .tc-flip__front--primary { @apply bg-primary; }
+    .tc-flip__front--success { background: hsl(142 76% 36%); }
+    .tc-flip__back { @apply bg-card; border: 1px solid hsl(var(--border)); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+    .tc-flip__stat { @apply text-foreground; }
+
+    /* --- Flip Inverted --- */
+    .tc-flip__front--inv-danger  { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-flip__front--inv-danger i { @apply text-destructive; }
+    .tc-flip__front--inv-primary { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-flip__front--inv-primary i { @apply text-foreground; }
+    .tc-flip__front--inv-success { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-flip__front--inv-success i { color: hsl(142 76% 36%); }
+    .tc-flip__back--danger  { @apply bg-destructive; }
+    .tc-flip__back--primary { @apply bg-primary; }
+    .tc-flip__back--success { background: hsl(142 76% 36%); }
+
+    /* --- Ribbon --- */
+    .tc-ribbon-card { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-ribbon-card:hover { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+    .tc-ribbon--success { background: hsl(142 76% 36%); }
+    .tc-ribbon--primary { @apply bg-primary; }
+    .tc-ribbon--muted   { @apply bg-muted-foreground; }
+    .tc-ribbon-card:nth-child(1) .tc-ribbon-card__score { color: hsl(142 76% 36%); }
+    .tc-ribbon-card:nth-child(2) .tc-ribbon-card__score { @apply text-foreground; }
+    .tc-ribbon-card:nth-child(3) .tc-ribbon-card__score { @apply text-muted-foreground; }
+
+    /* --- Comparison --- */
+    .tc-comparison__side { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-comparison__side--before h3 { @apply text-destructive; }
+    .tc-comparison__side--before li i { @apply text-destructive; }
+    .tc-comparison__side--after h3 { color: hsl(142 76% 36%); }
+    .tc-comparison__side--after li i { color: hsl(142 76% 36%); }
+
+    /* --- Steps --- */
+    .tc-step__number { @apply text-foreground; -webkit-text-fill-color: unset; }
+
+    /* --- Quote --- */
+    .tc-quote { @apply bg-muted; border: 1px solid hsl(var(--border)); }
+    .tc-quote::before { @apply text-foreground; opacity: 0.15; }
+
+    /* --- Callout --- */
+    .tc-callout { border: 1px solid hsl(var(--border)); }
+    .tc-callout--info { @apply bg-secondary; }
+    .tc-callout--info .tc-callout__icon { @apply text-foreground; }
+    .tc-callout--warning { background: hsl(38 92% 50% / 0.08); border-color: hsl(38 92% 50% / 0.3); }
+    .tc-callout--warning .tc-callout__icon { color: hsl(38 92% 50%); }
+
+    /* --- Image Overlay --- */
+    .tc-overlay { border: 1px solid hsl(var(--border)); }
+    .tc-overlay--primary .tc-overlay__bg { background: hsl(var(--primary) / 0.85); }
+    .tc-overlay--accent  .tc-overlay__bg { background: hsl(262 83% 58% / 0.85); }
+    .tc-overlay--success .tc-overlay__bg { background: hsl(142 76% 36% / 0.85); }
+
+    /* --- Hover Reveal --- */
+    .tc-reveal { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-reveal__visible { @apply bg-card; }
+    .tc-reveal__hidden { @apply bg-primary text-primary-foreground; }
+    .tc-reveal__hidden h4 { @apply text-primary-foreground; opacity: 0.8; }
+    .tc-reveal__hidden li { @apply text-primary-foreground; opacity: 0.85; }
+    .tc-reveal__hidden li::before { @apply text-primary-foreground; opacity: 0.5; }
+
+    /* --- Tier --- */
+    .tc-tier { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-tier:hover { @apply -translate-y-1; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    .tc-tier--featured { border: 2px solid hsl(var(--foreground)); }
+    .tc-tier--featured .tc-card__badge { @apply bg-primary text-primary-foreground; }
+    .tc-tier__features li i { color: hsl(142 76% 36%); }
+    .tc-tier__features li .fa-times { color: hsl(var(--border)); }
+    .tc-tier__btn { @apply bg-secondary text-secondary-foreground rounded-md; border: 1px solid hsl(var(--border)); }
+    .tc-tier--featured .tc-tier__btn { @apply bg-primary text-primary-foreground; border-color: transparent; }
+    .tc-tier__btn:hover { @apply opacity-90; }
+
+    /* --- Kanban --- */
+    .tc-kanban__col { background: hsl(var(--muted) / 0.5); }
+    .tc-kanban__header--primary { @apply bg-secondary text-foreground; }
+    .tc-kanban__header--warning { background: hsl(38 92% 50% / 0.1); color: hsl(38 92% 50%); }
+    .tc-kanban__header--success { background: hsl(142 76% 36% / 0.1); color: hsl(142 76% 36%); }
+    .tc-kanban__card { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-kanban__card:hover { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+    .tc-kanban__card--active { border-left: 3px solid hsl(38 92% 50%); }
+    .tc-kanban__tag--primary { @apply bg-secondary text-foreground rounded-md; }
+    .tc-kanban__tag--accent  { background: hsl(262 83% 58% / 0.1); color: hsl(262 83% 58%); @apply rounded-md; }
+    .tc-kanban__tag--warning { background: hsl(38 92% 50% / 0.1); color: hsl(38 92% 50%); @apply rounded-md; }
+    .tc-kanban__tag--success { background: hsl(142 76% 36% / 0.1); color: hsl(142 76% 36%); @apply rounded-md; }
+    .tc-kanban__progress-fill { background: hsl(38 92% 50%); }
+
+    /* --- Chat --- */
+    .tc-chat__avatar--q { @apply bg-primary text-primary-foreground; }
+    .tc-chat__avatar--a { background: hsl(142 76% 36%); @apply text-white; }
+    .tc-chat__bubble--q .tc-chat__msg { @apply bg-muted; border: 1px solid hsl(var(--border)); border-bottom-left-radius: 4px; }
+    .tc-chat__bubble--a .tc-chat__msg { @apply bg-secondary; border: 1px solid hsl(var(--border)); border-bottom-right-radius: 4px; }
+
+    /* --- Terminal --- */
+    .tc-term { @apply bg-primary; border: 1px solid hsl(var(--border)); }
+    .tc-term__bar { background: hsl(240 10% 3.9%); border-bottom: 1px solid hsl(var(--border)); }
+    .tc-term__title { @apply text-muted-foreground; }
+    .tc-term__body { @apply text-primary-foreground; }
+
+    /* --- Donut --- */
+    .tc-donut-card { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-donut-card:hover { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+
+    /* --- Stacked Bar --- */
+    .tc-sbar { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-sbar__track { @apply bg-secondary rounded-full; }
+    .tc-sbar__fill--primary { @apply bg-foreground rounded-full; }
+    .tc-sbar__fill--accent  { background: hsl(262 83% 58%); @apply rounded-full; }
+    .tc-sbar__fill--success { background: hsl(142 76% 36%); @apply rounded-full; }
+    .tc-sbar__fill--muted   { @apply bg-muted-foreground rounded-full; }
+    .tc-sbar__fill--danger  { @apply bg-destructive rounded-full; }
+
+    /* --- Tabbed --- */
+    .tc-tabbed { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-tabbed__tabs { @apply bg-muted; border-bottom: 1px solid hsl(var(--border)); }
+    .tc-tabbed__tab:hover { @apply text-foreground bg-muted; }
+    .tc-tabbed__tab--active { @apply text-foreground bg-card; }
+    .tc-tabbed__tab--active::after { @apply bg-foreground; }
+    .tc-tabbed__icon { @apply text-foreground; }
+    .tc-tabbed__chips span { @apply bg-secondary text-secondary-foreground rounded-md; }
+
+    /* --- Toast --- */
+    .tc-toast { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-toast--success::before { background: hsl(142 76% 36%); }
+    .tc-toast--info::before    { @apply bg-foreground; }
+    .tc-toast--warning::before { background: hsl(38 92% 50%); }
+    .tc-toast--danger::before  { @apply bg-destructive; }
+    .tc-toast--success .tc-toast__icon { color: hsl(142 76% 36%); }
+    .tc-toast--info .tc-toast__icon    { @apply text-foreground; }
+    .tc-toast--warning .tc-toast__icon { color: hsl(38 92% 50%); }
+    .tc-toast--danger .tc-toast__icon  { @apply text-destructive; }
+
+    /* --- H-Scroll --- */
+    .tc-hscroll__card { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-hscroll__card:hover { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+    .tc-hscroll__card--highlight { border: 2px solid hsl(var(--foreground)); }
+    .tc-hscroll__year { @apply bg-secondary text-secondary-foreground; }
+    .tc-hscroll__card--highlight .tc-hscroll__year { @apply bg-primary text-primary-foreground; }
+
+    /* --- Flow --- */
+    .tc-flow__node--primary { @apply bg-secondary text-foreground; }
+    .tc-flow__node--accent  { background: hsl(262 83% 58% / 0.1); color: hsl(262 83% 58%); }
+    .tc-flow__node--warning { background: hsl(38 92% 50% / 0.1); color: hsl(38 92% 50%); }
+    .tc-flow__node--success { background: hsl(142 76% 36% / 0.1); color: hsl(142 76% 36%); }
+
+    /* --- Heatmap --- */
+    .tc-heatmap { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-heatmap th { @apply text-muted-foreground bg-muted; border-bottom: 1px solid hsl(var(--border)); }
+    .tc-heatmap td { border-bottom: 1px solid hsl(var(--border)); }
+    .tc-heatmap tr:last-child td { border-bottom: none; }
+    .tc-heatmap__cell { background: hsl(142 76% 36% / calc(var(--heat) * 0.2)); }
+    .tc-heatmap tr:hover td { background: hsl(var(--muted) / 0.5); }
+    .tc-heatmap tr:hover .tc-heatmap__cell { background: hsl(142 76% 36% / calc(var(--heat) * 0.3)); }
+
+    /* --- Testimonial --- */
+    .tc-testi { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-testi:hover { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+    .tc-testi__avatar--primary { @apply bg-primary; }
+    .tc-testi__avatar--success { background: hsl(142 76% 36%); }
+
+    /* --- Floating Label --- */
+    .tc-flabel { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-flabel__title i { @apply text-foreground; }
+    .tc-flabel__item { border: 1px solid hsl(var(--border)); @apply rounded-md; }
+    .tc-flabel__item:hover { border-color: hsl(var(--foreground) / 0.3); @apply bg-muted; }
+    .tc-flabel__val--tag { @apply bg-secondary text-foreground rounded-md; }
+
+    /* --- Split Color --- */
+    .tc-split { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-split:hover { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    .tc-split--primary .tc-split__top { @apply bg-primary; }
+    .tc-split--accent  .tc-split__top { background: hsl(262 83% 58%); }
+    .tc-split--success .tc-split__top { background: hsl(142 76% 36%); }
+    .tc-split__circle { @apply bg-card; border-color: hsl(var(--background)); box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); }
+    .tc-split__tags span { @apply bg-secondary text-secondary-foreground rounded-md; }
+
+    /* --- Polaroid --- */
+    .tc-polaroid { @apply bg-card; border: 1px solid hsl(var(--border)); }
+    .tc-polaroid:hover { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    .tc-polaroid__img--primary { @apply bg-primary; }
+    .tc-polaroid__img--accent  { background: hsl(262 83% 58%); }
+    .tc-polaroid__img--success { background: hsl(142 76% 36%); }
+  </style>
 </head>
 <body class="tc-page">
 

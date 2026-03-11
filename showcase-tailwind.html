@@ -7,7 +7,263 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Courier+Prime&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/theme-gradient-border.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false },
+      theme: {
+        extend: {}
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    :root {
+      --tc-bg: #ffffff;
+      --tc-bg2: #f9fafb;
+      --tc-bg3: #f3f4f6;
+      --tc-text: #111827;
+      --tc-text2: #6b7280;
+      --tc-text-inv: #ffffff;
+      --tc-border: #e5e7eb;
+      --tc-primary: #2563eb;
+      --tc-success: #059669;
+      --tc-warning: #d97706;
+      --tc-danger: #dc2626;
+      --tc-accent: #7c3aed;
+      --tc-muted: #6b7280;
+    }
+
+    /* --- Cards --- */
+    .tc-card {
+      @apply bg-white rounded-lg shadow-sm;
+      ring: 1px solid #e5e7eb;
+      border: 1px solid #e5e7eb;
+    }
+    .tc-card:hover {
+      @apply -translate-y-0.5 shadow-md;
+      border-color: #d1d5db;
+    }
+    .tc-card__icon { @apply rounded-lg; }
+    .tc-card--primary .tc-card__icon { @apply bg-blue-100 text-blue-600; }
+    .tc-card--success .tc-card__icon { @apply bg-emerald-100 text-emerald-600; }
+    .tc-card--warning .tc-card__icon { @apply bg-amber-100 text-amber-600; }
+    .tc-card--danger  .tc-card__icon { @apply bg-red-100 text-red-600; }
+    .tc-card--primary .tc-card__value { @apply text-blue-600; }
+    .tc-card--success .tc-card__value { @apply text-emerald-600; }
+    .tc-card--warning .tc-card__value { @apply text-amber-600; }
+    .tc-card--danger  .tc-card__value { @apply text-red-600; }
+    .tc-card__bar { @apply bg-gray-100 rounded-full; }
+    .tc-card--primary .tc-card__bar-fill { @apply bg-blue-600 rounded-full; }
+    .tc-card--success .tc-card__bar-fill { @apply bg-emerald-600 rounded-full; }
+    .tc-card--warning .tc-card__bar-fill { @apply bg-amber-500 rounded-full; }
+    .tc-card--danger  .tc-card__bar-fill { @apply bg-red-500 rounded-full; }
+    .tc-card__badge { @apply bg-blue-50 text-blue-700 rounded-full; }
+    .tc-card__badge--success { @apply bg-emerald-50 text-emerald-700 rounded-full; }
+    .tc-card__badge--muted { @apply bg-gray-100 text-gray-600 rounded-full; }
+    .tc-card--radar { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+
+    /* --- Timeline --- */
+    .tc-timeline { --tl-c1: #2563eb; --tl-c2: #7c3aed; --tl-c3: #059669; --tl-c4: #d97706; }
+    .tc-timeline__dot--primary { @apply bg-blue-600; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #2563eb; }
+    .tc-timeline__dot--accent  { @apply bg-violet-600; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #7c3aed; }
+    .tc-timeline__dot--success { @apply bg-emerald-600; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #059669; }
+    .tc-timeline__dot--warning { @apply bg-amber-600; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #d97706; }
+    .tc-timeline__card { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+
+    /* --- Accordion --- */
+    .tc-accordion { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-accordion.open { @apply shadow-md; border-color: #d1d5db; }
+    .tc-accordion__icon { @apply bg-gray-100 rounded-lg; }
+    .tc-accordion:nth-child(1) .tc-accordion__icon { @apply text-blue-600; }
+    .tc-accordion:nth-child(2) .tc-accordion__icon { @apply text-violet-600; }
+    .tc-accordion:nth-child(3) .tc-accordion__icon { @apply text-emerald-600; }
+
+    /* --- Flip --- */
+    .tc-flip__front--danger  { @apply bg-gradient-to-br from-red-500 to-red-700; }
+    .tc-flip__front--primary { @apply bg-gradient-to-br from-blue-500 to-blue-700; }
+    .tc-flip__front--success { @apply bg-gradient-to-br from-emerald-500 to-emerald-700; }
+    .tc-flip__back { @apply bg-white shadow-lg; border: 1px solid #e5e7eb; }
+    .tc-flip__stat { @apply text-blue-600; }
+
+    /* --- Flip Inverted --- */
+    .tc-flip__front--inv-danger  { @apply bg-white; border: 1px solid #e5e7eb; }
+    .tc-flip__front--inv-danger i { @apply text-red-500; }
+    .tc-flip__front--inv-primary { @apply bg-white; border: 1px solid #e5e7eb; }
+    .tc-flip__front--inv-primary i { @apply text-blue-600; }
+    .tc-flip__front--inv-success { @apply bg-white; border: 1px solid #e5e7eb; }
+    .tc-flip__front--inv-success i { @apply text-emerald-600; }
+    .tc-flip__back--danger  { @apply bg-gradient-to-br from-red-500 to-red-700; }
+    .tc-flip__back--primary { @apply bg-gradient-to-br from-blue-500 to-blue-700; }
+    .tc-flip__back--success { @apply bg-gradient-to-br from-emerald-500 to-emerald-700; }
+
+    /* --- Ribbon --- */
+    .tc-ribbon-card { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-ribbon-card:hover { @apply shadow-md; }
+    .tc-ribbon--success { @apply bg-emerald-600; }
+    .tc-ribbon--primary { @apply bg-blue-600; }
+    .tc-ribbon--muted   { @apply bg-gray-500; }
+    .tc-ribbon-card:nth-child(1) .tc-ribbon-card__score { @apply text-emerald-600; }
+    .tc-ribbon-card:nth-child(2) .tc-ribbon-card__score { @apply text-blue-600; }
+    .tc-ribbon-card:nth-child(3) .tc-ribbon-card__score { @apply text-gray-500; }
+
+    /* --- Comparison --- */
+    .tc-comparison__side { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-comparison__side--before h3 { @apply text-red-600; }
+    .tc-comparison__side--before li i { @apply text-red-500; }
+    .tc-comparison__side--after h3 { @apply text-emerald-600; }
+    .tc-comparison__side--after li i { @apply text-emerald-500; }
+
+    /* --- Steps --- */
+    .tc-step__number {
+      @apply bg-gradient-to-br from-blue-600 to-violet-600 bg-clip-text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* --- Quote --- */
+    .tc-quote { @apply bg-gray-50; border: 1px solid #e5e7eb; }
+
+    /* --- Callout --- */
+    .tc-callout { border: 1px solid #e5e7eb; }
+    .tc-callout--info { @apply bg-blue-50; border-color: #bfdbfe; }
+    .tc-callout--info .tc-callout__icon { @apply text-blue-600; }
+    .tc-callout--warning { @apply bg-amber-50; border-color: #fde68a; }
+    .tc-callout--warning .tc-callout__icon { @apply text-amber-600; }
+
+    /* --- Image Overlay --- */
+    .tc-overlay { border: 1px solid #e5e7eb; }
+    .tc-overlay--primary .tc-overlay__bg { background: rgba(37, 99, 235, 0.85); }
+    .tc-overlay--accent  .tc-overlay__bg { background: rgba(124, 58, 237, 0.85); }
+    .tc-overlay--success .tc-overlay__bg { background: rgba(5, 150, 105, 0.85); }
+
+    /* --- Hover Reveal --- */
+    .tc-reveal { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-reveal__visible { @apply bg-white; }
+    .tc-reveal__hidden { @apply bg-gray-900; color: #fff; }
+    .tc-reveal__hidden h4 { @apply text-blue-400; }
+    .tc-reveal__hidden li { @apply text-gray-300; }
+    .tc-reveal__hidden li::before { @apply text-blue-400; }
+
+    /* --- Tier --- */
+    .tc-tier { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-tier:hover { @apply -translate-y-1 shadow-lg; }
+    .tc-tier--featured { @apply shadow-md; border: 2px solid #2563eb; }
+    .tc-tier--featured .tc-card__badge { @apply bg-blue-600 text-white; }
+    .tc-tier__features li i { @apply text-emerald-500; }
+    .tc-tier__features li .fa-times { @apply text-gray-300; }
+    .tc-tier__btn { @apply bg-gray-100 text-gray-600 rounded-lg; }
+    .tc-tier--featured .tc-tier__btn { @apply bg-blue-600 text-white; }
+    .tc-tier__btn:hover { @apply opacity-90; }
+
+    /* --- Kanban --- */
+    .tc-kanban__col { @apply bg-gray-50; }
+    .tc-kanban__header--primary { @apply bg-blue-50 text-blue-700; }
+    .tc-kanban__header--warning { @apply bg-amber-50 text-amber-700; }
+    .tc-kanban__header--success { @apply bg-emerald-50 text-emerald-700; }
+    .tc-kanban__card { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-kanban__card:hover { @apply shadow-md; }
+    .tc-kanban__card--active { border-left: 3px solid #d97706; }
+    .tc-kanban__tag--primary { @apply bg-blue-50 text-blue-700; }
+    .tc-kanban__tag--accent  { @apply bg-violet-50 text-violet-700; }
+    .tc-kanban__tag--warning { @apply bg-amber-50 text-amber-700; }
+    .tc-kanban__tag--success { @apply bg-emerald-50 text-emerald-700; }
+    .tc-kanban__progress-fill { @apply bg-amber-500; }
+
+    /* --- Chat --- */
+    .tc-chat__avatar--q { @apply bg-blue-600 text-white; }
+    .tc-chat__avatar--a { @apply bg-emerald-600 text-white; }
+    .tc-chat__bubble--q .tc-chat__msg { @apply bg-gray-100; border: 1px solid #e5e7eb; border-bottom-left-radius: 4px; }
+    .tc-chat__bubble--a .tc-chat__msg { @apply bg-blue-50; border: 1px solid #bfdbfe; border-bottom-right-radius: 4px; }
+
+    /* --- Terminal --- */
+    .tc-term { @apply bg-gray-900; border: 1px solid #374151; }
+    .tc-term__bar { @apply bg-gray-950; border-bottom: 1px solid #374151; }
+    .tc-term__title { @apply text-gray-400; }
+    .tc-term__body { @apply text-gray-200; }
+
+    /* --- Donut --- */
+    .tc-donut-card { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-donut-card:hover { @apply shadow-md; }
+
+    /* --- Stacked Bar --- */
+    .tc-sbar { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-sbar__track { @apply bg-gray-100 rounded-full; }
+    .tc-sbar__fill--primary { @apply bg-blue-600 rounded-full; }
+    .tc-sbar__fill--accent  { @apply bg-violet-600 rounded-full; }
+    .tc-sbar__fill--success { @apply bg-emerald-600 rounded-full; }
+    .tc-sbar__fill--muted   { @apply bg-gray-400 rounded-full; }
+    .tc-sbar__fill--danger  { @apply bg-red-500 rounded-full; }
+
+    /* --- Tabbed --- */
+    .tc-tabbed { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-tabbed__tabs { @apply bg-gray-50; border-bottom: 1px solid #e5e7eb; }
+    .tc-tabbed__tab:hover { @apply text-gray-900 bg-gray-100; }
+    .tc-tabbed__tab--active { @apply text-blue-600 bg-white; }
+    .tc-tabbed__tab--active::after { @apply bg-blue-600; }
+    .tc-tabbed__icon { @apply text-blue-600; }
+    .tc-tabbed__chips span { @apply bg-gray-100 text-gray-600 rounded-full; }
+
+    /* --- Toast --- */
+    .tc-toast { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-toast--success::before { @apply bg-emerald-500; }
+    .tc-toast--info::before    { @apply bg-blue-600; }
+    .tc-toast--warning::before { @apply bg-amber-500; }
+    .tc-toast--danger::before  { @apply bg-red-500; }
+    .tc-toast--success .tc-toast__icon { @apply text-emerald-500; }
+    .tc-toast--info .tc-toast__icon    { @apply text-blue-600; }
+    .tc-toast--warning .tc-toast__icon { @apply text-amber-500; }
+    .tc-toast--danger .tc-toast__icon  { @apply text-red-500; }
+
+    /* --- H-Scroll --- */
+    .tc-hscroll__card { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-hscroll__card:hover { @apply shadow-md; }
+    .tc-hscroll__card--highlight { @apply bg-blue-50; border: 2px solid #2563eb; }
+    .tc-hscroll__year { @apply bg-gray-100 text-gray-600; }
+    .tc-hscroll__card--highlight .tc-hscroll__year { @apply bg-blue-600 text-white; }
+
+    /* --- Flow --- */
+    .tc-flow__node--primary { @apply bg-blue-50 text-blue-700; }
+    .tc-flow__node--accent  { @apply bg-violet-50 text-violet-700; }
+    .tc-flow__node--warning { @apply bg-amber-50 text-amber-700; }
+    .tc-flow__node--success { @apply bg-emerald-50 text-emerald-700; }
+
+    /* --- Heatmap --- */
+    .tc-heatmap { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-heatmap th { @apply text-gray-500 bg-gray-50; border-bottom: 1px solid #e5e7eb; }
+    .tc-heatmap td { border-bottom: 1px solid #f3f4f6; }
+    .tc-heatmap tr:last-child td { border-bottom: none; }
+    .tc-heatmap__cell { background: rgba(5, 150, 105, calc(var(--heat) * 0.2)); }
+    .tc-heatmap tr:hover td { background: rgba(37, 99, 235, 0.04); }
+    .tc-heatmap tr:hover .tc-heatmap__cell { background: rgba(5, 150, 105, calc(var(--heat) * 0.3)); }
+
+    /* --- Testimonial --- */
+    .tc-testi { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-testi:hover { @apply shadow-md; }
+    .tc-testi__avatar--primary { @apply bg-blue-600; }
+    .tc-testi__avatar--success { @apply bg-emerald-600; }
+
+    /* --- Floating Label --- */
+    .tc-flabel { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-flabel__title i { @apply text-blue-600; }
+    .tc-flabel__item { border: 1px solid #e5e7eb; @apply rounded-lg; }
+    .tc-flabel__item:hover { border-color: #93c5fd; @apply bg-blue-50/50; }
+    .tc-flabel__val--tag { @apply bg-blue-50 text-blue-700 rounded-full; }
+
+    /* --- Split Color --- */
+    .tc-split { @apply bg-white shadow-sm; border: 1px solid #e5e7eb; }
+    .tc-split:hover { @apply shadow-xl; }
+    .tc-split--primary .tc-split__top { @apply bg-gradient-to-br from-blue-500 to-blue-700; }
+    .tc-split--accent  .tc-split__top { @apply bg-gradient-to-br from-violet-500 to-violet-700; }
+    .tc-split--success .tc-split__top { @apply bg-gradient-to-br from-emerald-500 to-emerald-700; }
+    .tc-split__circle { @apply bg-white shadow-md; border-color: #fff; }
+    .tc-split__tags span { @apply bg-gray-100 text-gray-600 rounded-full; }
+
+    /* --- Polaroid --- */
+    .tc-polaroid { @apply bg-white shadow-md; }
+    .tc-polaroid:hover { @apply shadow-xl; }
+    .tc-polaroid__img--primary { @apply bg-gradient-to-br from-blue-400 to-blue-700; }
+    .tc-polaroid__img--accent  { @apply bg-gradient-to-br from-violet-400 to-violet-700; }
+    .tc-polaroid__img--success { @apply bg-gradient-to-br from-emerald-400 to-emerald-700; }
+  </style>
 </head>
 <body class="tc-page">
 
